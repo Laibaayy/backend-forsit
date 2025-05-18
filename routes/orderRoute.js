@@ -1,12 +1,9 @@
 import express from "express";
 import {
   placeOrder,
-  placeOrderStripe,
-  placeOrderRazorpay,
   allOrders,
   userOrders,
   updateStatus,
-  verifyStripe,
   getOrderCount,
 } from "../controllers/orderController.js";
 import adminAuth from "../middleware/adminAuth.js";
@@ -20,16 +17,12 @@ orderRouter.post("/status", adminAuth, updateStatus);
 
 //payment features
 orderRouter.post("/place", authUser, placeOrder);
-orderRouter.post("/stripe", authUser, placeOrderStripe);
-orderRouter.post("/razorpay", authUser, placeOrderRazorpay);
 
 //User feature
-orderRouter.post("/userorders", authUser,userOrders);
+orderRouter.post("/userorders", authUser, userOrders);
 
-//verify payment
-orderRouter.post("/verifyStripe", authUser, verifyStripe);
 // Get the total count of orders
 
-orderRouter.get("/order-count", getOrderCount);  // Admin authentication required
+orderRouter.get("/order-count", getOrderCount); // Admin authentication required
 
 export default orderRouter;
